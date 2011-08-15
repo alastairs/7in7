@@ -1,18 +1,18 @@
 play_again_responses = { "y" => true, "Y" => true, "n" => false, "N" => false }
 play_again = true
 
-until !play_again
+while play_again
 	rand = rand(10) + 1
 	puts "Pick a number between 1 and 10"
 	guess = gets.to_i
 
 	until guess == rand
-		if guess < rand
+		if (1..rand).include? guess
 			puts "You guessed too low!  Try again"
 		end
 	
-		if guess > rand
-			puts "You guessed too high!  Try again"
+		if (rand..10).include? guess
+ 			puts "You guessed too high!  Try again"
 		end
 	
 		guess = gets.to_i
