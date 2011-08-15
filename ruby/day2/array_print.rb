@@ -1,15 +1,7 @@
 def array_print(a)
-	count = 1
-	stack = []
-	a.each do |item|
-		stack.push item
-		if (count == 4)
-			stack.each{|i| puts i}
-			count = 0
-			stack = []
-			puts
-		end
-		count = count + 1
+	a.each_slice(4) do |item| 
+		puts item
+		puts
 	end
 end
 
