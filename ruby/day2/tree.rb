@@ -1,9 +1,14 @@
 class Tree
   attr_accessor :children, :node_name
 
-  def initialize(name, children=[])
-  	  @children = children
-  	  @node_name = name
+  def initialize(tree_hash = {})
+  	  @children = []
+  	  tree_hash.each do |name, subtree|
+  	  	  @node_name = name
+  	  	  subtree.each do |childName, childSubtree|
+  	  	  	  @children.push(Tree.new({ childName => childSubtree }))
+	  	  end
+	  end
   end
 
   def visit_all(&block)
@@ -16,8 +21,18 @@ class Tree
   end
 end
 
-ruby_tree = Tree.new( "Ruby",
-					 [Tree.new("Reia"), Tree.new("MacRuby")] )
+ruby_tree = Tree.new({
+	'grandpa' => {
+		'dad' => {
+			'child1' => {},
+			'child2' => {}
+		},
+		'uncle' => {
+			'child3' => {},
+			'child4' => {}
+		}
+	}
+})
 
 puts "Visiting a node"
 ruby_tree.visit {|node| puts node.node_name}
