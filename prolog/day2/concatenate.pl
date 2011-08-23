@@ -1,2 +1,2 @@
 concatenate([], List, List).
-concatenate([Head|[]], List, [Head|List]).
+concatenate([Head|Tail1], List, [Head|Tail2]) :- concatenate(Tail1, List, Tail2).
